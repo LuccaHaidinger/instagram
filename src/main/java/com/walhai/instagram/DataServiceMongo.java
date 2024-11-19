@@ -138,19 +138,28 @@ public class DataServiceMongo {
 
     public void deleteData() {
         long mongoStart = System.currentTimeMillis();
-        List<Users> usersToDelete = usersMongo.findAll().stream()
-                .filter(user -> user.getEmail() != null && user.getEmail().endsWith("@aol.com"))
-                .toList();
+//        List<Users> usersToDelete = usersMongo.findAll().stream()
+//                .filter(user -> user.getEmail() != null && user.getEmail().endsWith("@aol.com"))
+//                .toList();
+//
+//        if (usersToDelete.isEmpty()) {
+//            System.out.println("No users found with emails ending in @aol.com.");
+//            return;
+//        }
 
-        if (usersToDelete.isEmpty()) {
-            System.out.println("No users found with emails ending in @aol.com.");
-            return;
-        }
-
-        // Delete matching users
-        usersMongo.deleteAll(usersToDelete);
-        System.out.println("Deleted " + usersToDelete.size() + " users with emails ending in @aol.com.");
+        // Delete users
+        usersMongo.deleteAll();//usersToDelete
+        //System.out.println("Deleted " + usersToDelete.size() + " users with emails ending in @aol.com.");
         long mongoEnd = System.currentTimeMillis();
-        System.out.println("MongoDB Delete Where Email @aol.com: " + (mongoEnd - mongoStart) + "ms");
+        System.out.println("MongoDB Delete Users: " + (mongoEnd - mongoStart) + "ms");
+    }
+
+    public void deleteFollows(){
+        followsMongo.deleteAll();//usersToDelete
+    }
+
+    public void deleteDataSilent(){
+        usersMongo.deleteAll();
+        followsMongo.deleteAll();
     }
 }

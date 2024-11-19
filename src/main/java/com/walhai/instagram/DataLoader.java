@@ -17,7 +17,9 @@ public class DataLoader implements CommandLineRunner {
     public void run(String... args) throws Exception {
         System.out.println("----------STARTING WITH MONGODB NOW----------");
         dataServiceMongo.loadData100();
+        dataServiceMongo.deleteDataSilent();
         dataServiceMongo.loadData1K();
+        dataServiceMongo.deleteDataSilent();
         dataServiceMongo.loadData10K();
         dataServiceMongo.getAllUsers();
         dataServiceMongo.getUsersByEmail();
@@ -25,10 +27,14 @@ public class DataLoader implements CommandLineRunner {
         dataServiceMongo.getUsersByEmailWithProjectionAndSorting("gmail.com$", "created_at", true);
         dataServiceMongo.updateWhereGmail();
         dataServiceMongo.deleteData();
+        dataServiceMongo.deleteFollows();
+        dataServiceMongo.loadData1K();
         System.out.println("----------ENDING WITH MONGODB NOW----------");
         System.out.println("----------STARTING WITH POSTGRES NOW----------");
         dataServicePost.loadData100();
+        dataServicePost.deleteDataSilent();
         dataServicePost.loadData1K();
+        dataServicePost.deleteDataSilent();
         dataServicePost.loadData10K();
         dataServicePost.getAllUsers();
         dataServicePost.getUsersByUsername();
@@ -36,6 +42,8 @@ public class DataLoader implements CommandLineRunner {
         dataServicePost.getUsersByUsernameWithProjectionAndSorting();
         dataServicePost.updateWhereGmail();
         dataServicePost.deleteData();
+        dataServicePost.deleteFollows();
+        dataServicePost.loadData1K();
         System.out.println("----------ENDING WITH POSTGRES NOW----------");
     }
 }

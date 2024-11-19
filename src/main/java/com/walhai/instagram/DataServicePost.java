@@ -159,4 +159,13 @@ public class DataServicePost {
         long postgresEnd2 = System.currentTimeMillis();
         System.out.println("Postgres Delete All: " + (postgresEnd2 - postgresStart2) + "ms");
     }
+
+    public void deleteFollows(){
+        followsPostgres.deleteAll();
+    }
+
+    public void deleteDataSilent(){
+        usersPostgres.deleteAll();
+        followsPostgres.deleteAll();
+    }
 }
